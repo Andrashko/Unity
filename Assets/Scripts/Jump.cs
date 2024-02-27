@@ -11,7 +11,7 @@ public class Jump : MonoBehaviour
 
     private float CalculateY(float x)
     {
-        return -4*H/(L*L) * (x-L)*x;
+        return -4*H/(L*L) * (x-L) * x;
     }
 
     private float x = 0f;
@@ -43,7 +43,6 @@ public class Jump : MonoBehaviour
             Reset();
         }
         if (isJumping) {
-            print(t);
             t += Time.deltaTime;
             CalculateNextPos(t);
             transform.position = startPos+ new Vector3(x, y, 0);

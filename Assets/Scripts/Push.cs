@@ -4,22 +4,24 @@ using UnityEngine;
 
 public class Push : MonoBehaviour
 {
-    public float Force;
+    public float Force = 20f;
     [SerializeField]
-    private Vector3 Direction = new Vector3(0, 1, 0);
+    private Vector3 Direction;
     private Rigidbody rb;
+    private CheckGround cg;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        Direction = transform.up;
+        cg = gameObject.GetComponentInChildren<CheckGround>();
     }
     
     // Update is called once per frame
     void Update()
     {
-        transform.position += Vector3.forward;
-        if (Input.GetButton("Jump")) {
-            rb.AddForce(Direction * Force*Time.deltaTime);
+        if (Input.GetButtonDown("Jump") && cg.IsOnGround) {
+            rb.AddForce(Direction * Force);
         }
 
     }
@@ -28,4 +30,5 @@ public class Push : MonoBehaviour
     {
         
     }
+
 }
